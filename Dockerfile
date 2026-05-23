@@ -1,27 +1,28 @@
 # Hermes Gateway - Render
-# FIXED: Correct Hermes CLI installation
+# FIXED: Use Python/uv to install Hermes CLI
 
-FROM node:18-alpine
+FROM python:3.11-slim
 
 WORKDIR /app
 
 # Install system dependencies
-RUN apk add --no-cache python3 make g++ git curl nodejs npm
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    curl git && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
 
-# Install Hermes CLI globally
-RUN npm install -g @hermes-agent/cli@latest
+# Install uv (Python package manager)
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install --omit=dev
+# Install Hermes from GitHub
+RUN /root/.local/bin/uv pip install git+https://github.com/NousResearch/hermes-agent.git
 
 # Copy application code
 COPY . .
 
-# Expose port
+# Expose port 9119
 EXPOSE 9119
 
 # Start Hermes gateway
-CMD ["node", "-e", "require('@hermes-agent/gateway').start({port:9119})"]
+CMD ["/root/.local/bin/hermes", "gateway", "run"]
