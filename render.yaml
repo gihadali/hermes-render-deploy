@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: hermes-gateway
+    env: docker
+    buildCommand: "npm ci"
+    startCommand: "hermes gateway run"
+    plan: free
+    branch: main
+    repo: https://github.com/gihadali/hermes-railway-deploy.git
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_ALLOWED_USERS
+        sync: false
+      - key: HERMES_TELEGRAM_PROFILE
+        value: cloud
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: CHERRYIN_API_KEY
+        sync: false
+      - key: HERMES_MODEL
+        value: openrouter/deepseek/deepseek-chat
+        sync: false

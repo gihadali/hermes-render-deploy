@@ -1,0 +1,11 @@
+{
+  "name": "hermes-gateway",
+  "version": "1.0.0",
+  "description": "Hermes Agent Telegram Gateway",
+  "scripts": {
+    "start": "hermes gateway run"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

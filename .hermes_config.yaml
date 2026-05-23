@@ -1,0 +1,31 @@
+model:
+  default: openrouter/deepseek/deepseek-chat
+  provider: openrouter
+  api_key: ${OPENROUTER_API_KEY}
+
+agent:
+  max_turns: 90
+  tool_use_enforcement: true
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+
+display:
+  skin: dark
+  tool_progress: true
+  show_reasoning: false
+  show_cost: true
+
+terminal:
+  backend: local
+  timeout: 180
+
+approvals:
+  mode: off
+
+stt:
+  enabled: false
+
+tts:
+  enabled: false
