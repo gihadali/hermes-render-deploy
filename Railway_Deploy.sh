@@ -1,0 +1,20 @@
+#!/bin/bash
+# Quick Railway Deployment
+
+echo "🚀 Deploying to Railway..."
+echo ""
+echo "1. Go to: https://railway.app"
+echo "2. Click: New Project"
+echo "3. Click: Deploy from GitHub"
+echo "4. Select: gihadali/hermes-render-deploy"
+echo "5. Click: Deploy"
+echo ""
+echo "6. Add Environment Variables:"
+echo "   - TELEGRAM_BOT_TOKEN=8747968818:AAGHIqvSaCq2dqnkEIVUZtuewkr-z417hwk"
+echo "   - TELEGRAM_ALLOWED_USERS=6398958474"
+echo "   - HERMES_TELEGRAM_PROFILE=cloud"
+echo ""
+echo "7. Wait 2-3 minutes for build"
+echo "8. Test @TonDark_bot on Telegram!"
+echo ""
+echo "Done! 🎉"
