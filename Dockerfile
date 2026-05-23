@@ -1,27 +1,27 @@
-# Hermes Gateway - Render Deployment
-# Last updated: 2026-05-23 19:07:35
+# Hermes Gateway - Render
+# FIXED: Correct Hermes CLI installation
 
 FROM node:18-alpine
 
 WORKDIR /app
 
 # Install system dependencies
-RUN apk add --no-cache python3 make g++ git curl
+RUN apk add --no-cache python3 make g++ git curl nodejs npm
 
-# Download Hermes CLI from GitHub
-RUN curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/packages/cli/index.js -o /usr/local/bin/hermes-cli &&     chmod +x /usr/local/bin/hermes-cli
+# Install Hermes CLI globally
+RUN npm install -g @hermes-agent/cli@latest
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (npm install instead of npm ci)
+# Install dependencies
 RUN npm install --omit=dev
 
 # Copy application code
 COPY . .
 
-# Expose port 9119 for Telegram gateway
+# Expose port
 EXPOSE 9119
 
 # Start Hermes gateway
-CMD ["node", "/usr/local/bin/hermes-cli", "gateway", "run"]
+CMD ["node", "-e", "require('@hermes-agent/gateway').start({port:9119})"]
